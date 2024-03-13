@@ -1,0 +1,14 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "helm.fullname" . }}
+  labels:
+    {{- include "helm.labels" . | nindent 4 }}
+spec:
+
+  template:
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "docker.io/library/spark"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
